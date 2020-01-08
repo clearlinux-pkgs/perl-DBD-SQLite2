@@ -4,13 +4,13 @@
 #
 Name     : perl-DBD-SQLite2
 Version  : 0.38
-Release  : 11
+Release  : 12
 URL      : https://cpan.metacpan.org/authors/id/R/RU/RURBAN/DBD-SQLite2-0.38.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RU/RURBAN/DBD-SQLite2-0.38.tar.gz
 Summary  : 'Self Contained RDBMS in a DBI Driver (sqlite 2.x)'
 Group    : Development/Tools
 License  : Artistic-1.0-Perl
-Requires: perl-DBD-SQLite2-lib = %{version}-%{release}
+Requires: perl-DBD-SQLite2-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 BuildRequires : perl(DBI)
 
@@ -26,29 +26,31 @@ then DBD::SQLite2 may be just what you need.
 %package dev
 Summary: dev components for the perl-DBD-SQLite2 package.
 Group: Development
-Requires: perl-DBD-SQLite2-lib = %{version}-%{release}
 Provides: perl-DBD-SQLite2-devel = %{version}-%{release}
+Requires: perl-DBD-SQLite2 = %{version}-%{release}
 
 %description dev
 dev components for the perl-DBD-SQLite2 package.
 
 
-%package lib
-Summary: lib components for the perl-DBD-SQLite2 package.
-Group: Libraries
+%package perl
+Summary: perl components for the perl-DBD-SQLite2 package.
+Group: Default
+Requires: perl-DBD-SQLite2 = %{version}-%{release}
 
-%description lib
-lib components for the perl-DBD-SQLite2 package.
+%description perl
+perl components for the perl-DBD-SQLite2 package.
 
 
 %prep
 %setup -q -n DBD-SQLite2-0.38
+cd %{_builddir}/DBD-SQLite2-0.38
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -58,7 +60,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -78,13 +80,13 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/SQLite2.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/getsqlite.pl
 
 %files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/DBD::SQLite2.3
 
-%files lib
+%files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/auto/DBD/SQLite2/SQLite2.so
+/usr/lib/perl5/vendor_perl/5.30.1/x86_64-linux-thread-multi/DBD/SQLite2.pm
+/usr/lib/perl5/vendor_perl/5.30.1/x86_64-linux-thread-multi/DBD/getsqlite.pl
+/usr/lib/perl5/vendor_perl/5.30.1/x86_64-linux-thread-multi/auto/DBD/SQLite2/SQLite2.so
