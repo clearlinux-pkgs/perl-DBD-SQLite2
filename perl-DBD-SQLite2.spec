@@ -7,7 +7,7 @@
 #
 Name     : perl-DBD-SQLite2
 Version  : 0.38
-Release  : 26
+Release  : 27
 URL      : https://cpan.metacpan.org/authors/id/R/RU/RURBAN/DBD-SQLite2-0.38.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RU/RURBAN/DBD-SQLite2-0.38.tar.gz
 Summary  : 'Self Contained RDBMS in a DBI Driver (sqlite 2.x)'
